@@ -17,10 +17,13 @@ Run one reusable prompt per workshop checkpoint:
 
 | When | Type in Copilot Chat |
 |---|---|
+| Prepare tools and local configuration | `/module-00-prep` |
+| Build and prepare the first deployment | `/module-01-deploy` |
 | Check progress | `/workshop-status` |
 | Module 02 | `/ai-chat-route` |
 | Module 03, STK Push | `/daraja-stk-push` |
 | Module 03, callback | `/daraja-callback` |
+| Module 04, final verification | `/module-04-test` |
 | Runtime AI provider fails | `/switch-ai-provider` |
 | Diagnose a Daraja error | `/debug-daraja` followed by the exact error |
 | Review AI before M-Pesa | `/review-ai-prompt` |
@@ -32,6 +35,17 @@ should only inspect the named workshop files; it must not run the app, tests,
 dependency installation, or external API calls. If an older invocation keeps
 running after this file changes, cancel it, start a new chat, and reload the
 VS Code window so Copilot reloads the prompt.
+
+`/ai-chat-route` automatically uses Copilot's editing **Agent**. It implements
+Module 02 directly in `app/api/chat/route.ts` and the `sendMessage()` function,
+then runs a build check. It must leave every Module 03 placeholder untouched.
+
+All `/module-*`, `/ai-chat-route`, and `/daraja-*` implementation prompts use
+Copilot's editing **Agent**. They make the scoped code or configuration changes
+and verify them instead of only explaining the module. They pause when a human
+must create a secret, sign into Vercel, approve an external action, or perform
+the M-Pesa sandbox interaction. Diagnostic prompts such as `/workshop-status`,
+`/debug-daraja`, and `/review-ai-prompt` remain read-only.
 
 ## Using custom agents
 

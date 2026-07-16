@@ -8,28 +8,36 @@ export const DARAJA_BASE_URL = "https://sandbox.safaricom.co.ke";
  * Returns a fresh OAuth bearer token for Daraja requests.
  * Tokens are valid for ~1 hour — call this before every request rather
  * than caching long-term.
- *
- * TODO (Module 03): implement using MPESA_CONSUMER_KEY / MPESA_CONSUMER_SECRET
  */
 export async function getAccessToken(): Promise<string> {
-  throw new Error("getAccessToken() not implemented yet — see Module 03");
+  const auth = Buffer.from(
+    `${process.env.MPESA_CONSUMER_KEY}:${process.env.MPESA_CONSUMER_SECRET}`,
+  ).toString("base64");
+
+  const res = await fetch(
+    `${DARAJA_BASE_URL}/oauth/v1/generate?grant_type=client_credentials`,
+    { headers: { Authorization: `Basic ${auth}` } },
+  );
+
+  if (!res.ok) throw new Error("Failed to get Daraja access token");
+  const data = await res.json();
+  return data.access_token;
 }
 
 /**
  * Builds the YYYYMMDDHHmmss timestamp Daraja expects.
- *
- * TODO (Module 03): implement
  */
 export function darajaTimestamp(): string {
-  throw new Error("darajaTimestamp() not implemented yet — see Module 03");
+  return new Date()
+    .toISOString()
+    .replace(/[^0-9]/g, "")
+    .slice(0, 14);
 }
 
 export function darajaPassword(
   shortcode: string,
   passkey: string,
-  timestamp: string
+  timestamp: string,
 ): string {
-  return Buffer.from(`${shortcode}${passkey}${timestamp}`).toString(
-    "base64"
-  );
+  return Buffer.from(`${shortcode}${passkey}${timestamp}`).toString("base64");
 }

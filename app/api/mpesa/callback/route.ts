@@ -1,16 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// TODO (Module 03): parse Safaricom's callback body, log the result
-// (or persist it), and ALWAYS return HTTP 200 — Safaricom retries
-// aggressively on anything else.
-//
-// Fastest path: in GitHub Copilot Chat, run `/daraja-callback`.
-
 export async function POST(req: NextRequest) {
-  const body = await req.json().catch(() => null);
-  console.log("Daraja callback received (not yet handled):", body);
+  try {
+    const body = await req.json();
+    const result = body?.Body?.stkCallback;
 
-  // Always 200, even before this is fully implemented, so Safaricom
-  // doesn't retry indefinitely during development.
+    if (result?.ResultCode === 0) {
+      const items: Array<{ Name: string; Value: unknown }> =
+        result.CallbackMetadata?.Item ?? [];
+      const amount = items.find((i) => i.Name === "Amount")?.Value;
+      const receipt = items.find((i) => i.Name === "MpesaReceiptNumber")?.Value;
+      console.log(`Payment received: KES ${amount}, receipt ${receipt}`);
+      // MVP: log it. Next iteration: look up the order by
+      // result.CheckoutRequestID and mark it paid in a real database.
+    } else {
+      console.log(`Payment not completed: ${result?.ResultDesc}`);
+    }
+  } catch (err) {
+    console.error("Failed to parse Daraja callback:", err);
+  }
+
   return NextResponse.json({ ResultCode: 0, ResultDesc: "Accepted" });
 }

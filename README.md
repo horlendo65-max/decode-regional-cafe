@@ -113,10 +113,21 @@ Open the repository in VS Code with GitHub Copilot Chat. The `.github/` folder i
 | `daraja-debugger` | Diagnose a Daraja/M-Pesa error from the actual error message, using a symptom→cause table |
 | `prompt-reviewer` | Review your AI system prompt and JSON schema for edge cases and provider lock-in before it's wired to a real payment |
 
-**Reusable prompts:** `/workshop-status`, the four module/skill prompts, plus `/debug-daraja` and `/review-ai-prompt` as Free-plan equivalents of the custom agents. These keep each request small enough for a live workshop.
+**Reusable prompts:** each workshop module has an implementation command:
+`/module-00-prep`, `/module-01-deploy`, `/ai-chat-route`,
+`/daraja-stk-push`, `/daraja-callback`, and `/module-04-test`.
+`/workshop-status`, `/debug-daraja`, and `/review-ai-prompt` are read-only
+checks. Keeping one task per prompt makes the workflow practical with Copilot
+Free.
 
 Example prompts:
 
+```
+/module-00-prep
+```
+```
+/module-01-deploy
+```
 ```
 /ai-chat-route
 ```
@@ -128,6 +139,9 @@ Select Daraja Debugger: My STK Push returns "Invalid Access Token".
 ```
 ```
 /workshop-status
+```
+```
+/module-04-test
 ```
 
 If a Free account runs out of requests or does not expose a preview feature, continue with the module READMEs under `workshop/`; they contain the same implementation details. A temporary license changes Copilot features and limits, not the repository or the finished application.

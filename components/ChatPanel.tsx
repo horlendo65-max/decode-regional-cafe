@@ -43,7 +43,10 @@ export default function ChatPanel() {
     } catch (err) {
       setMessages((m) => [
         ...m,
-        { role: "bot", text: "Something went wrong talking to the AI. Check the console." },
+        {
+          role: "bot",
+          text: "Something went wrong talking to the AI. Check the console.",
+        },
       ]);
       console.error(err);
     } finally {
@@ -108,27 +111,33 @@ export default function ChatPanel() {
   );
 }
 
-// ---------------------------------------------------------------------------
-// TODO (Module 02): implement this to POST { message: text } to /api/chat
-// and return the parsed ChatResponse JSON.
-// Run `/ai-chat-route` in GitHub Copilot Chat, or see
-// workshop/02-ai-integration/README.md, for the exact shape to wire up.
-// Works the same regardless of which AI_PROVIDER is configured server-side.
-// ---------------------------------------------------------------------------
 async function sendMessage(text: string): Promise<ChatResponse> {
-  throw new Error("sendMessage() not implemented yet — see Module 02");
+  const res = await fetch("/api/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: text }),
+  });
+  if (!res.ok) throw new Error(`Chat request failed: ${res.status}`);
+  return res.json();
 }
 
-// ---------------------------------------------------------------------------
-// TODO (Module 03): implement this to POST
-// { phone, amountKes: decision.suggestedDailyKes, goalSummary: decision.goalSummary }
-// to /api/mpesa/stkpush.
-// Run `/daraja-stk-push` in GitHub Copilot Chat, or see
-// workshop/03-daraja-integration/README.md, for the exact shape to wire up.
-// ---------------------------------------------------------------------------
 async function confirmAndSave(
   decision: SavingsDecision,
-  phone: string
+  phone: string,
 ): Promise<void> {
-  throw new Error("confirmAndSave() not implemented yet — see Module 03");
+  const res = await fetch("/api/mpesa/stkpush", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      phone,
+      amountKes: decision.suggestedDailyKes,
+      goalSummary: decision.goalSummary,
+    }),
+  });
+  const data = await res.json();
+  if (data.ResponseCode !== "0") {
+    throw new Error(
+      data.errorMessage ?? data.ResponseDescription ?? "STK push failed",
+    );
+  }
 }

@@ -1,24 +1,44 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getAIClient } from "@/lib/ai-provider";
 
-// TODO (Module 02): call getAIClient() from lib/ai-provider.ts with a
-// system prompt that returns structured JSON matching
-// lib/types.ts -> ChatResponse. This works unchanged regardless of
-// which free provider (Groq/Gemini/OpenRouter/Cerebras) is configured
-// via AI_PROVIDER in .env.local.
-//
-// Fastest path: in GitHub Copilot Chat, run `/ai-chat-route` and describe
-// what you're building ("turn a savings goal into a daily savings plan").
-// It will scaffold this route using lib/ai-provider.ts and the
-// SYSTEM_PROMPT pattern from workshop/02-ai-integration/README.md.
+const SYSTEM_PROMPT = `You are PesaBot, a friendly savings assistant for Kenyan users.
+Given a user's goal in free text, respond ONLY with JSON matching this exact shape,
+no markdown, no commentary:
+
+{
+  "goalSummary": string,
+  "targetAmountKes": number,
+  "targetDateHint": string,
+  "suggestedDailyKes": number,
+  "reasoning": string
+}
+
+If the user hasn't given enough detail to compute this, ask ONE clarifying
+question instead, as JSON: { "needsClarification": string }`;
 
 export async function POST(req: NextRequest) {
   const { message } = await req.json();
+  const { client, model } = getAIClient();
 
-  return NextResponse.json(
-    {
-      needsClarification:
-        "This route isn't implemented yet — see Module 02 in the workshop guide.",
-    },
-    { status: 200 }
-  );
+  const completion = await client.chat.completions.create({
+    model,
+    messages: [
+      { role: "system", content: SYSTEM_PROMPT },
+      { role: "user", content: message },
+    ],
+    temperature: 0.3,
+    response_format: { type: "json_object" },
+  });
+
+  const raw = completion.choices[0]?.message?.content ?? "{}";
+
+  try {
+    const parsed = JSON.parse(raw);
+    return NextResponse.json(parsed);
+  } catch {
+    return NextResponse.json(
+      { needsClarification: "Sorry, could you rephrase your savings goal?" },
+      { status: 200 },
+    );
+  }
 }
