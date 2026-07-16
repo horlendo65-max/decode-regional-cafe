@@ -134,4 +134,4 @@ You should get back a decision card with a daily amount — that card's **Confir
 
 [#if-your-provider-is-rate-limited-or-its-model-was-deprecated](#if-your-provider-is-rate-limited-or-its-model-was-deprecated)
 
-Free tiers get tightened or reshuffled without much notice — check `../FREE-AI-MODELS.md` for current status, or in Claude Code just say "switch to Gemini" (or whichever provider) and the `switch-ai-provider` skill will change your `.env.local` correctly — no code edit needed, since the route only ever talks to `getAIClient()`.
+Free runtime tiers get tightened or reshuffled without much notice — check `../FREE-AI-MODELS.md` for current status, or run `/switch-ai-provider Move to Gemini` in Copilot Chat. The shared skill changes `.env.local` correctly; no route edit is needed because the route only talks to `getAIClient()`.

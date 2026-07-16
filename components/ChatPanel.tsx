@@ -111,7 +111,7 @@ export default function ChatPanel() {
 // ---------------------------------------------------------------------------
 // TODO (Module 02): implement this to POST { message: text } to /api/chat
 // and return the parsed ChatResponse JSON.
-// Run the `ai-chat-route` skill in Claude Code, or see
+// Run `/ai-chat-route` in GitHub Copilot Chat, or see
 // workshop/02-ai-integration/README.md, for the exact shape to wire up.
 // Works the same regardless of which AI_PROVIDER is configured server-side.
 // ---------------------------------------------------------------------------
@@ -123,7 +123,7 @@ async function sendMessage(text: string): Promise<ChatResponse> {
 // TODO (Module 03): implement this to POST
 // { phone, amountKes: decision.suggestedDailyKes, goalSummary: decision.goalSummary }
 // to /api/mpesa/stkpush.
-// Run the `daraja-stk-push` skill in Claude Code, or see
+// Run `/daraja-stk-push` in GitHub Copilot Chat, or see
 // workshop/03-daraja-integration/README.md, for the exact shape to wire up.
 // ---------------------------------------------------------------------------
 async function confirmAndSave(

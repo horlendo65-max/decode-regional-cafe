@@ -11,6 +11,7 @@
 - Node.js 20+ (`node -v` to check)
 - Git
 - A code editor (VS Code recommended) or an online IDE (GitHub Codespaces, StackBlitz) if you'd rather not install anything locally — everything in this workshop is plain file edits, no local-only steps except the final `git push`
+- GitHub Copilot Chat for VS Code: Copilot Free is sufficient; an event-provided temporary license gives higher limits and optional agent features. Follow [the Copilot guide](../COPILOT-GUIDE.md) and sign in before the session.
 
 ```
 node -v
@@ -79,6 +80,7 @@ Open `http://localhost:3000` — you should see a bare chat UI with a text box a
 [#checklist](#checklist)
 
 - [ ] Node 20+, Git installed
+- [ ] VS Code Copilot Chat opens for this repository (Free or temporary license)
 - [ ] One free AI provider key saved (Groq, Gemini, OpenRouter, or Cerebras)
 - [ ] Daraja Consumer Key, Consumer Secret, Shortcode, Passkey saved
 - [ ] Vercel account connected to GitHub

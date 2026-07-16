@@ -1,6 +1,6 @@
 ---
 name: daraja-callback
-description: Use this skill when implementing app/api/mpesa/callback/route.ts — the endpoint Safaricom calls after a customer completes or cancels an STK Push. Triggers on requests like "handle the M-Pesa callback", "implement the Daraja callback route", "parse the STK callback body", or any task about receiving the async result of a payment in this repo.
+description: Use this GitHub Copilot skill when implementing app/api/mpesa/callback/route.ts, the endpoint Safaricom calls after a customer completes or cancels an STK Push. Trigger for requests such as "handle the M-Pesa callback", "implement the Daraja callback route", "parse the STK callback body", or other tasks about receiving an asynchronous payment result in this repository.
 ---
 
 # Daraja Callback Handler (PesaBot Module 03, part 2)

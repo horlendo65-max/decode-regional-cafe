@@ -3,7 +3,7 @@
 // All four supported free providers expose an OpenAI-compatible
 // /chat/completions endpoint, so a single OpenAI SDK client works for
 // all of them — only baseURL, apiKey, and model name change. This means
-// the app (and the Claude Code skill that scaffolds it) doesn't need to
+// the app and the GitHub Copilot skill that scaffolds it don't need to
 // know or care which free API an attendee signed up for.
 //
 // Switch providers with one env var — no code changes required:

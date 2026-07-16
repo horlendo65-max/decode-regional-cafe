@@ -1,6 +1,6 @@
 // Helpers for talking to the Safaricom Daraja sandbox API.
 // Implemented live in Module 03 — see workshop/03-daraja-integration/README.md
-// or run the `daraja-stk-push` skill in Claude Code to scaffold this file.
+// or run the `/daraja-stk-push` prompt in GitHub Copilot to scaffold it.
 
 export const DARAJA_BASE_URL = "https://sandbox.safaricom.co.ke";
 

@@ -8,7 +8,7 @@ Free LLM tiers change often — treat these as a starting point and re-check quo
 
 [#design-choice-the-app-doesnt-pick-a-provider-for-you](#design-choice-the-app-doesnt-pick-a-provider-for-you)
 
-`lib/ai-provider.ts` supports all four providers below through one interface, switched by an `AI_PROVIDER` env var. This exists because a room of 20-40 people won't all have the same provider working on the same network at the same time — someone's Groq key will be rate-limited, someone's campus Wi-Fi will block Gemini, and that shouldn't derail their build. Pick one during prep; switch anytime with a `.env.local` change (or the `switch-ai-provider` Claude Code skill) if it stops working.
+`lib/ai-provider.ts` supports all four providers below through one interface, switched by an `AI_PROVIDER` env var. This exists because a room of 20-40 people won't all have the same provider working on the same network at the same time — someone's Groq key will be rate-limited, someone's campus Wi-Fi will block Gemini, and that shouldn't derail their build. Pick one during prep; switch anytime with a `.env.local` change (or the `switch-ai-provider` GitHub Copilot skill) if it stops working.
 
 ## A recent example of why this matters
 
@@ -73,4 +73,4 @@ In June 2026, Groq deprecated `llama-3.3-70b-versatile` (the model most Groq tut
 Free tiers get tightened, renamed, or reshuffled with little notice — this happened to Groq's Llama models in June 2026, and to other providers' catalogs more than once through 2025-2026. Two things reduce risk on workshop day:
 
 1. **Do a dry run 24–48 hours before**, not just at prep time — a key or model id that worked last week can start failing without warning.
-2. **Make sure everyone knows the `switch-ai-provider` Claude Code skill exists**, even if you plan to demo with one provider throughout — a rate-limit or deprecated-model error mid-session becomes a two-minute `.env.local` change instead of a dead-air moment, since `app/api/chat/route.ts` never hardcodes a provider.
+2. **Make sure everyone knows the `/switch-ai-provider` Copilot prompt and skill exist**, even if you plan to demo with one provider throughout — a rate-limit or deprecated-model error mid-session becomes a two-minute `.env.local` change instead of a dead-air moment, since `app/api/chat/route.ts` never hardcodes a provider.

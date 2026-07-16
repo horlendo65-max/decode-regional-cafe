@@ -43,10 +43,10 @@ decode-regional-cafe/
 ├── app/                    # Next.js App Router — pages + API routes (stubbed)
 ├── components/             # Chat UI (built) — ChatPanel.tsx, DecisionCard.tsx
 ├── lib/                    # ai-provider.ts (multi-provider AI client), daraja.ts (stubbed), types.ts
-├── .claude/                # Claude Code skills, subagents, commands — see below
-│   ├── skills/
+├── .github/                # Copilot instructions, prompt files, and custom agents
 │   ├── agents/
-│   └── commands/
+│   ├── prompts/
+│   └── skills/
 ├── workshop/                # The 90-minute guide, module by module
 │   ├── 00-prep/
 │   ├── 01-scaffold-and-deploy/
@@ -90,11 +90,11 @@ decode-regional-cafe/
 
 See **[workshop/FACILITATOR-GUIDE.md](workshop/FACILITATOR-GUIDE.md)** for minute-by-minute timing and what to cut if you're running behind.
 
-## Building with Claude Code — skills, subagents, and a command
+## Building with GitHub Copilot Free or a temporary license
 
-[#building-with-claude-code--skills-subagents-and-a-command](#building-with-claude-code--skills-subagents-and-a-command)
+[#building-with-github-copilot-free-or-a-temporary-license](#building-with-github-copilot-free-or-a-temporary-license)
 
-This repo ships a `.claude/` folder so attendees can build each module by describing what they want in Claude Code, instead of copy-pasting from the workshop guide line by line. It works identically whether Claude Code is running locally, in an online IDE (GitHub Codespaces, StackBlitz, Replit), or any other editor — everything here is just file edits, nothing environment-specific.
+Open the repository in VS Code with GitHub Copilot Chat. The `.github/` folder is the single source for repository instructions, reusable slash prompts, custom agents, and project skills. See **[workshop/COPILOT-GUIDE.md](workshop/COPILOT-GUIDE.md)** for setup, Free-plan fallbacks, and tips for preserving the limited allowance.
 
 **Skills** (auto-trigger on natural descriptions, or invoke by name):
 
@@ -105,31 +105,31 @@ This repo ships a `.claude/` folder so attendees can build each module by descri
 | `daraja-callback` | The M-Pesa callback handler |
 | `switch-ai-provider` | Swaps `AI_PROVIDER` mid-workshop if one free tier is rate-limited or a model gets deprecated — config change, not a rewrite |
 
-**Subagents** (invoke when you need a second opinion, not a scaffold):
+**Custom agents** (select from the Copilot agent picker when available):
 
 | Agent | Use it to |
 |---|---|
 | `daraja-debugger` | Diagnose a Daraja/M-Pesa error from the actual error message, using a symptom→cause table |
 | `prompt-reviewer` | Review your AI system prompt and JSON schema for edge cases and provider lock-in before it's wired to a real payment |
 
-**Command:** `/workshop-status` — reads the repo and tells you which modules are done, stubbed, or need attention.
+**Reusable prompts:** `/workshop-status`, the four module/skill prompts, plus `/debug-daraja` and `/review-ai-prompt` as Free-plan equivalents of the custom agents. These keep each request small enough for a live workshop.
 
 Example prompts:
 
 ```
-Use the ai-chat-route skill to implement app/api/chat/route.ts.
+/ai-chat-route
 ```
 ```
-Groq is rate-limited — use the switch-ai-provider skill to move to Gemini.
+/switch-ai-provider Move from Groq to Gemini.
 ```
 ```
-My STK Push is returning "Invalid Access Token" — use the daraja-debugger agent.
+Select Daraja Debugger: My STK Push returns "Invalid Access Token".
 ```
 ```
 /workshop-status
 ```
 
-If you're not using Claude Code, the same implementation details are written out in full in the module READMEs under `workshop/` — the skills and the guide describe the exact same code, just in two formats.
+If a Free account runs out of requests or does not expose a preview feature, continue with the module READMEs under `workshop/`; they contain the same implementation details. A temporary license changes Copilot features and limits, not the repository or the finished application.
 
 ## Deploying
 

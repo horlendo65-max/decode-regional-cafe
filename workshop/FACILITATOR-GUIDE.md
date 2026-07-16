@@ -49,11 +49,11 @@ In priority order — cut from the bottom up:
 - The Daraja OAuth token expires after ~1 hour — if the workshop overruns, tokens generated early may need refreshing
 - Sandbox STK Push only prompts the shared test number `254708374149` — real personal numbers will not receive a prompt in sandbox, this trips people up every time
 
-## Using the .claude/ tooling as a facilitator
+## Using Copilot Free and temporary licenses as a facilitator
 
-[#using-the-claude-tooling-as-a-facilitator](#using-the-claude-tooling-as-a-facilitator)
+[#using-copilot-free-and-temporary-licenses-as-a-facilitator](#using-copilot-free-and-temporary-licenses-as-a-facilitator)
 
-If attendees are using Claude Code, `/workshop-status` is a fast way for them (or you, walking the room) to see what's done vs. stubbed without reading through files manually. If someone's stuck and you don't have time to look yourself, pointing them at the `daraja-debugger` or `prompt-reviewer` subagent is often faster than a manual code review — both are scoped narrowly enough not to go off on tangents.
+Have everyone run `/workshop-status` first, then one module prompt at a time. This uses fewer Copilot Free requests than broad requests to finish the repository. Attendees with a temporary paid license can select **Daraja Debugger** or **Prompt Reviewer** from the agent picker; Free attendees can use the ordinary-chat fallbacks in [COPILOT-GUIDE.md](COPILOT-GUIDE.md). Keep pairs ready so anyone who reaches a usage limit can continue from the written module guide without losing workshop time.
 
 ## After the workshop
 

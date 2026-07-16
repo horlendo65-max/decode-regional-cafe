@@ -1,6 +1,6 @@
 ---
 name: ai-chat-route
-description: Use this skill when implementing app/api/chat/route.ts, or wiring the sendMessage() function in components/ChatPanel.tsx, for the PesaBot workshop app. Works with whichever free AI provider the attendee has configured (Groq, Gemini, OpenRouter, or Cerebras) — detects it from .env.local rather than assuming one. Triggers on requests like "implement the chat route", "connect the AI", "wire up the AI model", "turn a goal into a decision", or any task involving turning free-text chat input into structured JSON via an LLM in this repo. Works identically whether Claude Code is running locally, in an online IDE (Codespaces, StackBlitz, Replit), or any other editor — it only edits repo files, nothing environment-specific.
+description: Use this GitHub Copilot skill when implementing app/api/chat/route.ts or wiring sendMessage() in components/ChatPanel.tsx for PesaBot. It detects the configured free runtime AI provider from .env.local. Trigger for requests such as "implement the chat route", "connect the AI", "wire up the AI model", "turn a goal into a decision", or other tasks that turn free-text input into structured JSON through an LLM in this repository.
 ---
 
 # AI Chat Route (PesaBot Module 02) — multi-provider

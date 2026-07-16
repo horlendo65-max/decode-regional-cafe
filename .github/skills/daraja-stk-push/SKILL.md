@@ -1,6 +1,6 @@
 ---
 name: daraja-stk-push
-description: Use this skill when implementing lib/daraja.ts, app/api/mpesa/stkpush/route.ts, or wiring the confirmAndSave() function in components/ChatPanel.tsx. Triggers on requests like "implement the STK push", "wire up M-Pesa", "connect Daraja", "get an OAuth token from Safaricom", or any task involving triggering an M-Pesa payment prompt in this repo. For diagnosing an error from an already-implemented STK push call, use the daraja-debugger agent instead. Works the same in any editor or online IDE — file edits only, no environment-specific steps.
+description: Use this GitHub Copilot skill when implementing lib/daraja.ts, app/api/mpesa/stkpush/route.ts, or confirmAndSave() in components/ChatPanel.tsx. Trigger for requests such as "implement the STK push", "wire up M-Pesa", "connect Daraja", "get an OAuth token from Safaricom", or other tasks that trigger an M-Pesa payment prompt. For an error in an existing implementation, use the Daraja Debugger agent or debug-daraja prompt instead.
 ---
 
 # Daraja STK Push (PesaBot Module 03, part 1)
@@ -144,8 +144,8 @@ async function confirmAndSave(
 3. Check the terminal running `npm run dev` — you should see the raw Daraja JSON response with a `CheckoutRequestID`, not an error
 4. Real phones will not receive a prompt in sandbox — only `254708374149` does. This is expected, not a bug.
 
-## Hand off to the debugger agent
+## Hand off to Copilot's debugger agent
 
-[#hand-off-to-the-debugger-agent](#hand-off-to-the-debugger-agent)
+[#hand-off-to-copilots-debugger-agent](#hand-off-to-copilots-debugger-agent)
 
 If the implementation looks correct but requests are still failing (401s, `Invalid Access Token`, malformed responses), stop guessing and suggest the user invoke the `daraja-debugger` agent with the actual error message and response body.

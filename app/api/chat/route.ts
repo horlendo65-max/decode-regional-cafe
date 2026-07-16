@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 // which free provider (Groq/Gemini/OpenRouter/Cerebras) is configured
 // via AI_PROVIDER in .env.local.
 //
-// Fastest path: in Claude Code, run the `ai-chat-route` skill and describe
+// Fastest path: in GitHub Copilot Chat, run `/ai-chat-route` and describe
 // what you're building ("turn a savings goal into a daily savings plan").
 // It will scaffold this route using lib/ai-provider.ts and the
 // SYSTEM_PROMPT pattern from workshop/02-ai-integration/README.md.

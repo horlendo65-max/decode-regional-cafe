@@ -1,6 +1,6 @@
 ---
 name: switch-ai-provider
-description: Use this skill when an attendee needs to switch which free AI provider PesaBot uses — e.g. Groq is rate-limited or blocked on the venue network mid-workshop, or a provider's default model has been deprecated. Triggers on requests like "switch to Gemini", "Groq isn't working, use another provider", "change the AI model", or "the model was decommissioned". This is a config change, not a rewrite — app/api/chat/route.ts should not need to change at all.
+description: Use this GitHub Copilot skill when switching PesaBot's free runtime AI provider because of rate limits, network blocking, or model deprecation. Trigger for requests such as "switch to Gemini", "Groq isn't working", "use another provider", "change the AI model", or "the model was decommissioned". Change configuration rather than rewriting app/api/chat/route.ts.
 ---
 
 # Switch AI Provider

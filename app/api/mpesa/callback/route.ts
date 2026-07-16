@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 // (or persist it), and ALWAYS return HTTP 200 — Safaricom retries
 // aggressively on anything else.
 //
-// Fastest path: in Claude Code, run the `daraja-callback` skill.
+// Fastest path: in GitHub Copilot Chat, run `/daraja-callback`.
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null);

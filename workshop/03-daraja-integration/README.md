@@ -170,4 +170,4 @@ Vercel redeploys automatically. On the live URL, use the **sandbox test number `
 | STK prompt never reaches a real phone in sandbox | Expected — sandbox only prompts the shared test number `254708374149` |
 | Callback route errors out | Make sure it still returns HTTP 200 even inside a catch block, or Safaricom will retry and eventually give up silently |
 
-Stuck on something not in this table? Ask the `daraja-debugger` subagent in Claude Code with your exact error message.
+Stuck on something not in this table? Select the **Daraja Debugger** custom agent in Copilot when available, or ask ordinary Copilot Chat to diagnose the exact error without editing files.
