@@ -1,14 +1,24 @@
 ---
+name: workshop-status
 description: Check completed and stubbed PesaBot workshop modules and recommend one next action
+agent: ask
 ---
 
-Check the current repository state without changing files.
+Perform a fast, read-only status check. Do not edit files, run terminal commands,
+run tests, start the application, install dependencies, browse the web, or scan
+unrelated directories.
 
-1. Inspect `app/api/chat/route.ts`. Report whether Module 02 is stubbed or calls `getAIClient()` from `lib/ai-provider.ts`.
-2. Check whether `.env.local` exists and whether `AI_PROVIDER` plus its matching API key are configured. Never reveal a key or print the file.
-3. Inspect `lib/daraja.ts` and `app/api/mpesa/stkpush/route.ts`. Report whether Module 03 part 1 is stubbed or implemented.
-4. Inspect `app/api/mpesa/callback/route.ts`. Report whether Module 03 part 2 parses `stkCallback` and always acknowledges the callback.
-5. Inspect `components/ChatPanel.tsx`. Report whether `sendMessage()` and `confirmAndSave()` remain stubbed.
+Read only these files:
 
-Return at most nine lines: a short checklist using ✅ done, ⏳ stubbed, or ❓ cannot tell, followed by exactly one recommended next prompt or skill name.
+- [chat route](../../app/api/chat/route.ts): Module 02 is done only if it calls `getAIClient()`.
+- [Daraja helpers](../../lib/daraja.ts) and [STK route](../../app/api/mpesa/stkpush/route.ts): Module 03 STK is done only if neither contains its not-implemented placeholder.
+- [callback route](../../app/api/mpesa/callback/route.ts): callback handling is done only if it parses `stkCallback` and always acknowledges with HTTP 200.
+- [chat panel](../../components/ChatPanel.tsx): report `sendMessage()` and `confirmAndSave()` separately based on their placeholders.
 
+For configuration, check only whether `.env.local` exists and whether active
+`AI_PROVIDER` and its matching API-key variable are non-empty. Never quote,
+display, or summarize any secret value.
+
+Return exactly six short lines: Module 02, configuration, STK Push, callback,
+UI wiring, and one recommended next slash command. Use ✅ done, ⏳ stubbed,
+or ❓ cannot tell. Do not explain your process.

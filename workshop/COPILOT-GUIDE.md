@@ -27,6 +27,12 @@ Run one reusable prompt per workshop checkpoint:
 
 If prompt files do not appear after cloning, reload the VS Code window. As a universal fallback, type a normal request such as: `Use the ai-chat-route skill in .github/skills to implement Module 02.`
 
+`/workshop-status` automatically uses Copilot's read-only **Ask** agent. It
+should only inspect the named workshop files; it must not run the app, tests,
+dependency installation, or external API calls. If an older invocation keeps
+running after this file changes, cancel it, start a new chat, and reload the
+VS Code window so Copilot reloads the prompt.
+
 ## Using custom agents
 
 When the agent picker is available, select:
