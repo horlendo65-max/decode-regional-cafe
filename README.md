@@ -18,7 +18,7 @@ This repo is both things at once: a working Next.js starter app (**PesaBot**) an
 | Basic deployed interface | Deployed to Vercel, live public URL |
 | Rapid prototyping | Deploy-first workflow, pre-built scaffold, ~90 min total |
 | Use-case flexibility | Same skeleton adapts to Health (symptom triage → book a slot) or Agri (crop input advice → order supplies) — see [workshop/04-test-and-wrap-up](workshop/04-test-and-wrap-up/README.md) |
-| Free-model flexibility | Works with Groq, Gemini, OpenRouter, or Cerebras — swap via one env var, see below |
+| Free-model flexibility | Uses Gemini's free API tier by default; Groq, OpenRouter, and Cerebras remain one-env-var fallbacks |
 
 ## Quick start
 
@@ -65,7 +65,8 @@ decode-regional-cafe/
 
 - **Duration:** 90 minutes, live-coding
 - **Stack:** Next.js 14 (App Router) + TypeScript
-- **AI:** any of Groq / Gemini / OpenRouter / Cerebras free tiers — see [workshop/FREE-AI-MODELS.md](workshop/FREE-AI-MODELS.md)
+- **IDE assistant:** GitHub Copilot Free or an event-provided temporary Copilot license
+- **Runtime AI:** Gemini free API tier by default; other supported providers remain fallbacks — see [workshop/FREE-AI-MODELS.md](workshop/FREE-AI-MODELS.md)
 - **Payments:** Safaricom Daraja API, sandbox environment (no real money moves)
 - **Deploy target:** Vercel free tier
 
@@ -120,7 +121,7 @@ Example prompts:
 /ai-chat-route
 ```
 ```
-/switch-ai-provider Move from Groq to Gemini.
+/switch-ai-provider Move from Gemini to Groq.
 ```
 ```
 Select Daraja Debugger: My STK Push returns "Invalid Access Token".

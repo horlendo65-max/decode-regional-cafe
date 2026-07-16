@@ -18,20 +18,20 @@ node -v
 git --version
 ```
 
-## 2. Get a free AI API key — pick ONE provider
+## 2. Get a free Gemini API key
 
-[#2-get-a-free-ai-api-key--pick-one-provider](#2-get-a-free-ai-api-key--pick-one-provider)
+[#2-get-a-free-gemini-api-key](#2-get-a-free-gemini-api-key)
 
-You only need one of these four. Pick whichever signs up fastest on your network — see [../FREE-AI-MODELS.md](../FREE-AI-MODELS.md) for the full comparison. The app works identically regardless of which one you pick; it's a single `AI_PROVIDER` value in your `.env.local`.
+Create a key in [Google AI Studio](https://aistudio.google.com) and save it somewhere secure. Gemini is the common workshop default, which makes the live instructions easier to follow. See [../FREE-AI-MODELS.md](../FREE-AI-MODELS.md) for fallback providers if Gemini is unavailable on the venue network.
 
 | Provider | Sign up at | Notes |
 |---|---|---|
-| **Groq** (recommended default) | [console.groq.com](https://console.groq.com) | Fastest responses, good for a live demo |
-| Gemini | [aistudio.google.com](https://aistudio.google.com) | Good fallback if Groq is blocked on venue Wi-Fi |
+| **Gemini** (recommended default) | [aistudio.google.com](https://aistudio.google.com) | Shared workshop path; OpenAI-compatible endpoint |
+| Groq | [console.groq.com](https://console.groq.com) | Fast fallback if Gemini is blocked or rate-limited |
 | OpenRouter | [openrouter.ai](https://openrouter.ai) | One key, many free models |
 | Cerebras | [cloud.cerebras.ai](https://cloud.cerebras.ai) | Very fast, smaller free catalog |
 
-All four: no credit card required for the free tier. Create the key and save it somewhere safe — you'll paste it into `.env.local` during the session.
+Start with the Gemini free tier; do not enable billing for this workshop. Create the key and save it somewhere safe—you'll paste it into `.env.local`, never into source code or Copilot Chat.
 
 ## 3. Create a Safaricom Daraja sandbox account (Payments)
 
@@ -67,7 +67,7 @@ npm install
 cp .env.example .env.local
 ```
 
-Open `.env.local` and set `AI_PROVIDER` to whichever provider you picked in step 2, plus its matching API key. Leave the Daraja and `NEXT_PUBLIC_APP_URL` fields for now — those come in Module 01 and 03.
+Open `.env.local`, leave `AI_PROVIDER=gemini`, and set `GEMINI_API_KEY` to your Google AI Studio key. Leave the Daraja and `NEXT_PUBLIC_APP_URL` fields for now—those come in Modules 01 and 03.
 
 ```
 npm run dev
@@ -81,9 +81,9 @@ Open `http://localhost:3000` — you should see a bare chat UI with a text box a
 
 - [ ] Node 20+, Git installed
 - [ ] VS Code Copilot Chat opens for this repository (Free or temporary license)
-- [ ] One free AI provider key saved (Groq, Gemini, OpenRouter, or Cerebras)
+- [ ] Gemini free API key saved; one fallback provider is optional
 - [ ] Daraja Consumer Key, Consumer Secret, Shortcode, Passkey saved
 - [ ] Vercel account connected to GitHub
 - [ ] Repo cloned, `npm install` completed, `npm run dev` runs and loads `http://localhost:3000`
 
-If any of these fail, message the facilitator before the workshop — corporate/campus Wi-Fi sometimes blocks `console.groq.com` or `developer.safaricom.co.ke`, which is worth discovering in advance rather than in the room. If your usual provider is blocked, that's exactly what the other three options are for.
+If any of these fail, message the facilitator before the workshop—corporate/campus Wi-Fi sometimes blocks Google AI Studio or `developer.safaricom.co.ke`. Discover that before the event and use one of the fallback providers if necessary.

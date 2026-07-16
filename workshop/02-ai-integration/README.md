@@ -15,7 +15,7 @@ A chatbot that only produces prose is a dead end for an MVP — nothing downstre
 
 [#why-this-works-with-any-of-the-four-providers](#why-this-works-with-any-of-the-four-providers)
 
-Groq, Gemini, OpenRouter, and Cerebras all expose an OpenAI-compatible `/chat/completions` endpoint. `lib/ai-provider.ts` already wraps this: it reads `AI_PROVIDER` from your environment and returns a ready-to-use client and model name, whichever of the four you picked. You never import a provider-specific SDK in the route itself — only `getAIClient()`.
+Gemini is the workshop default and exposes an OpenAI-compatible `/chat/completions` endpoint. `lib/ai-provider.ts` wraps it and the three fallback providers: it reads `AI_PROVIDER` and returns a ready-to-use client and model. You never import a provider-specific SDK in the route itself—only `getAIClient()`.
 
 ```typescript
 // lib/ai-provider.ts already does this — you don't need to touch it
@@ -134,4 +134,4 @@ You should get back a decision card with a daily amount — that card's **Confir
 
 [#if-your-provider-is-rate-limited-or-its-model-was-deprecated](#if-your-provider-is-rate-limited-or-its-model-was-deprecated)
 
-Free runtime tiers get tightened or reshuffled without much notice — check `../FREE-AI-MODELS.md` for current status, or run `/switch-ai-provider Move to Gemini` in Copilot Chat. The shared skill changes `.env.local` correctly; no route edit is needed because the route only talks to `getAIClient()`.
+Free runtime tiers get tightened or reshuffled without much notice—check `../FREE-AI-MODELS.md` for current status, or run `/switch-ai-provider Move from Gemini to Groq` in Copilot Chat. The skill changes `.env.local` correctly; no route edit is needed because the route only talks to `getAIClient()`.

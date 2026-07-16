@@ -8,7 +8,7 @@ Free LLM tiers change often — treat these as a starting point and re-check quo
 
 [#design-choice-the-app-doesnt-pick-a-provider-for-you](#design-choice-the-app-doesnt-pick-a-provider-for-you)
 
-`lib/ai-provider.ts` supports all four providers below through one interface, switched by an `AI_PROVIDER` env var. This exists because a room of 20-40 people won't all have the same provider working on the same network at the same time — someone's Groq key will be rate-limited, someone's campus Wi-Fi will block Gemini, and that shouldn't derail their build. Pick one during prep; switch anytime with a `.env.local` change (or the `switch-ai-provider` GitHub Copilot skill) if it stops working.
+`lib/ai-provider.ts` uses Gemini by default and supports three fallback providers through the same interface, switched by `AI_PROVIDER`. A shared Gemini path keeps the live workshop consistent, while the fallbacks prevent a network block or rate limit from derailing the build. Switch with `.env.local` or the `switch-ai-provider` GitHub Copilot skill; never rewrite the chat route.
 
 ## A recent example of why this matters
 
@@ -20,22 +20,22 @@ In June 2026, Groq deprecated `llama-3.3-70b-versatile` (the model most Groq tut
 
 [#the-four-options](#the-four-options)
 
-### Groq (recommended default)
+### Google Gemini (AI Studio)—recommended default
 
-**Why:** runs on custom LPU hardware, so responses come back fast enough that a room full of people typing into a chat UI doesn't sit waiting. OpenAI-SDK compatible. No credit card required.
+**Why:** one common setup for the room, a free API tier, and an OpenAI-compatible endpoint that works with the repository's existing client.
+
+- Create a key: [aistudio.google.com](https://aistudio.google.com)
+- OpenAI-compatible base URL: `https://generativelanguage.googleapis.com/v1beta/openai/`
+- Workshop model: `gemini-3.5-flash`
+- Keep billing disabled for the workshop and check the active project limits in AI Studio before the event.
+
+### Groq—first fallback
+
+**Why:** fast OpenAI-compatible inference if Gemini is blocked or rate-limited on the venue network.
 
 - Sign up: [console.groq.com](https://console.groq.com)
-- Current recommended model: `openai/gpt-oss-120b` (see [console.groq.com/docs/models](https://console.groq.com/docs/models) for the live list — Groq deprecates models with a few weeks' notice, so check before the session)
-- Rough free-tier shape: ~30 requests/minute, model-dependent daily token caps — comfortably enough for a workshop of 20-40 people each sending a handful of chat messages, worth a dry run beforehand if your group is larger
-
-### Google Gemini (AI Studio)
-
-**Why:** best-documented alternative if Groq is blocked on the venue's network, and a very large context window if you want to feed it more background than a single chat message. Gemini exposes an OpenAI-compatible endpoint directly, so it slots into `lib/ai-provider.ts` the same way as the others.
-
-- Sign up: [aistudio.google.com](https://aistudio.google.com)
-- OpenAI-compatible base URL: `https://generativelanguage.googleapis.com/v1beta/openai/`
-- Current recommended model: `gemini-2.5-flash` (check [ai.google.dev/gemini-api/docs/models](https://ai.google.dev/gemini-api/docs/models) for newer options — Gemini 3.x models were rolling out through 2026)
-- No card required for the free tier, though Google may use free-tier prompts to improve its models (opt-outs are region-dependent) — worth mentioning if attendees plan to test with real personal data
+- Current repository fallback: `openai/gpt-oss-120b`
+- Check [console.groq.com/docs/models](https://console.groq.com/docs/models) before the session because model availability changes.
 
 ### OpenRouter
 
@@ -60,10 +60,10 @@ In June 2026, Groq deprecated `llama-3.3-70b-versatile` (the model most Groq tut
 
 | Need | Use |
 |---|---|
-| Fast responses in a live room | Groq |
-| Backup if Groq is blocked/rate-limited | Gemini |
+| Standard workshop setup | Gemini (`gemini-3.5-flash`) |
+| Backup if Gemini is blocked/rate-limited | Groq |
 | Attendees want to try many models after the workshop | OpenRouter |
-| Very long context (large documents, big prompts) | Gemini (large context window on free tier) |
+| Very long context (large documents, big prompts) | Gemini |
 | Batch/offline processing, not live latency-sensitive | Cerebras |
 
 ## A note for facilitators

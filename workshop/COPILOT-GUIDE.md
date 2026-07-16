@@ -1,6 +1,6 @@
 # GitHub Copilot setup for the workshop
 
-This repository supports both **Copilot Free** and a **temporary paid Copilot license**. The application still needs one runtime AI API key from `FREE-AI-MODELS.md`; Copilot helps write the code but does not replace the model called by PesaBot.
+This repository uses **GitHub Copilot** as the IDE assistant and the **Gemini free API tier** as PesaBot's runtime AI. Copilot helps write the code but does not replace the Gemini model called by the deployed application.
 
 ## Before the session
 

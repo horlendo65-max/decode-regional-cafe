@@ -40,15 +40,16 @@ If you're working straight off the shared repo with write access, you can skip t
 4. Under **Environment Variables**, add the values from your `.env.local`:
 
 ```
-AI_PROVIDER=groq
-GROQ_API_KEY=your_key_here
+AI_PROVIDER=gemini
+GEMINI_API_KEY=your_key_here
+GEMINI_MODEL=gemini-3.5-flash
 MPESA_CONSUMER_KEY=your_key_here
 MPESA_CONSUMER_SECRET=your_secret_here
 MPESA_SHORTCODE=174379
 MPESA_PASSKEY=your_passkey_here
 ```
 
-(Swap the `AI_PROVIDER`/key pair for whichever provider you picked in prep.)
+(Only switch the `AI_PROVIDER`/key pair if Gemini was unavailable during prep.)
 
 5. Click **Deploy**
 

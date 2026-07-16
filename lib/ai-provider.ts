@@ -7,8 +7,8 @@
 // know or care which free API an attendee signed up for.
 //
 // Switch providers with one env var — no code changes required:
-//   AI_PROVIDER=groq        (default)
-//   AI_PROVIDER=gemini
+//   AI_PROVIDER=gemini      (default)
+//   AI_PROVIDER=groq
 //   AI_PROVIDER=openrouter
 //   AI_PROVIDER=cerebras
 //
@@ -41,7 +41,7 @@ const PROVIDERS: Record<AIProviderId, ProviderConfig> = {
     baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
     apiKeyEnv: "GEMINI_API_KEY",
     modelEnv: "GEMINI_MODEL",
-    defaultModel: "gemini-2.5-flash",
+    defaultModel: "gemini-3.5-flash",
   },
   openrouter: {
     baseURL: "https://openrouter.ai/api/v1",
@@ -61,7 +61,7 @@ const PROVIDERS: Record<AIProviderId, ProviderConfig> = {
 };
 
 function currentProviderId(): AIProviderId {
-  const raw = (process.env.AI_PROVIDER ?? "groq").toLowerCase();
+  const raw = (process.env.AI_PROVIDER ?? "gemini").toLowerCase();
   if (raw in PROVIDERS) return raw as AIProviderId;
   throw new Error(
     `Unknown AI_PROVIDER "${raw}" — expected one of: ${Object.keys(PROVIDERS).join(", ")}`
