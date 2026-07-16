@@ -1,0 +1,1 @@
+{"name":"building-ai-apps-fast-workshop","private":true,"scripts":{"check":"npm --prefix reference/api run build && npm --prefix reference/web run build"}}
